@@ -201,13 +201,11 @@ nav{
 }
 
 .item-media img,
-.item-media video,
-.item-media iframe{
+.item-media video{
     width:100%;
     height:100%;
     display:block;
     object-fit:cover;
-    border:0;
 }
 
 .item-caption{
@@ -274,11 +272,6 @@ nav{
     display:block;
     pointer-events:none;
     background:#050505;
-    transform-origin:top left;
-}
-
-.website-card iframe{
-    transform:scale(1);
 }
 
 .website-caption{
@@ -350,14 +343,12 @@ nav{
 }
 
 .lightbox-inner img,
-.lightbox-inner video,
-.lightbox-inner iframe{
+.lightbox-inner video{
     width:100%;
     max-height:85vh;
     object-fit:contain;
     display:block;
     background:#000;
-    border:0;
 }
 
 .lightbox-close{
@@ -581,10 +572,26 @@ Games, websites, 3D models, and whatever else I feel like building.
 <div class="game-gallery" id="monkemanor"></div>
 </section>
 
+<section class="game-section">
+<div class="game-title">
+<span>09</span>
+<h2>Martial Monkey</h2>
+</div>
+<div class="game-gallery" id="martialmonkey"></div>
+</section>
+
+<section class="game-section">
+<div class="game-title">
+<span>10</span>
+<h2>Project Helix</h2>
+</div>
+<div class="game-gallery" id="projecthelix"></div>
+</section>
+
 <section class="website-section" id="websites">
 
 <div class="website-title">
-<span>09</span>
+<span>11</span>
 <h2>Websites</h2>
 </div>
 
@@ -776,15 +783,36 @@ const GAMES = {
     monkemanor: [
         ["https://raw.githubusercontent.com/redvr777/PMAPro/main/monkemanor/Screenshot%202026-08-08%20143911.png","Monke Manor","image"],
         ["https://raw.githubusercontent.com/redvr777/PMAPro/main/monkemanor/Screenshot%202026-08-08%20143932.png","Monke Manor","image"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/monkemanor/Screenshot%202026-08-08%20234901.png","Monke Manor","image"]
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/monkemanor/Screenshot%202026-08-08%20234901.png","Monke Manor","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/monkemanor/Screenshot%202026-08-11%20003131.png","Monke Manor","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/monkemanor/Screenshot%202026-08-11%20220112.png","Monke Manor","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/monkemanor/Screenshot%202026-08-12%20001853.png","Monke Manor","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/monkemanor/Screenshot%202026-08-12%20224342.png","Monke Manor","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/monkemanor/Screenshot%202026-08-12%20224616.png","Monke Manor","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/monkemanor/Screenshot%202026-08-12%20224628.png","Monke Manor","image"]
+    ],
+
+    martialmonkey: [
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/martialmonkey/Screenshot%202026-08-14%20153138.png","Martial Monkey","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/martialmonkey/Screenshot%202026-08-14%20153147.png","Martial Monkey","image"]
+    ],
+
+    projecthelix: [
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/project%20helix/Screenshot%202026-07-28%20212341.png","Project Helix","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/project%20helix/Screenshot%202026-07-28%20212946.png","Project Helix","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/project%20helix/Screenshot%202026-07-28%20212954.png","Project Helix","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/project%20helix/Screenshot%202026-07-29%20004557.png","Project Helix","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/project%20helix/Screenshot%202026-07-29%20233125.png","Project Helix","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/project%20helix/Screenshot%202026-07-29%20233501.png","Project Helix","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/project%20helix/Screenshot%202026-07-29%20233522.png","Project Helix","image"]
     ]
 };
 
 const WEBSITES = [
-    ["https://fear-reality.vercel.app/","Fear Reality"],
-    ["https://yuza-developer.vercel.app/","Yuza Developer"],
-    ["https://monke-manor.vercel.app/","Monke Manor"],
-    ["https://monke-tek-remastered.vercel.app/#gallery","Monke Tek Remastered"]
+    "https://fear-reality.vercel.app/",
+    "https://yuza-developer.vercel.app/",
+    "https://monke-manor.vercel.app/",
+    "https://monke-tek-remastered.vercel.app/#gallery"
 ];
 
 function createGallery(id,items){
@@ -817,24 +845,23 @@ function createGallery(id,items){
 function createWebsiteGallery(){
     const gallery=document.getElementById("websitesGallery");
 
-    WEBSITES.forEach(item=>{
+    WEBSITES.forEach(url=>{
         const element=document.createElement("a");
 
         element.className="website-card";
-        element.href=item[0];
+        element.href=url;
         element.target="_blank";
         element.rel="noopener noreferrer";
 
         element.innerHTML=`
             <div class="website-media">
                 <iframe
-                    src="${item[0]}"
+                    src="${url}"
                     loading="lazy"
                     tabindex="-1"
                     scrolling="no">
                 </iframe>
             </div>
-            <div class="website-caption">${item[1]}</div>
         `;
 
         gallery.appendChild(element);
