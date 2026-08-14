@@ -1,260 +1,328 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yuza's Work</title>
+<title>Yuza</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
---black:#0A0A0B;
---panel:#131315;
---line:#232326;
---white:#F5F5F3;
---muted:#8B8B90;
---blue:#2451FF;
---red:#E11D2E;
+    --bg:#0b0b0c;
+    --card:#111113;
+    --border:#202023;
+    --text:#f1f1ef;
+    --muted:#85858a;
+    --accent:#ffffff;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-background:var(--black);
-color:var(--white);
-font-family:'Inter',-apple-system,sans-serif;
-line-height:1.6;
+    background:var(--bg);
+    color:var(--text);
+    font-family:Inter,Arial,sans-serif;
+    line-height:1.5;
 }
-a{color:inherit;text-decoration:none}
-::selection{background:var(--red);color:#fff}
-.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+.wrap{
+    max-width:1050px;
+    margin:auto;
+    padding:0 24px;
+}
+
 header{
-border-bottom:1px solid var(--line);
-position:sticky;
-top:0;
-background:var(--black);
-z-index:10;
+    border-bottom:1px solid var(--border);
 }
+
 nav{
-max-width:1080px;
-margin:0 auto;
-padding:20px 24px;
-display:flex;
-align-items:center;
-justify-content:space-between;
+    max-width:1050px;
+    margin:auto;
+    padding:22px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
-.logo{font-weight:800;font-size:16px;letter-spacing:-0.01em}
-.logo .dot{color:var(--red)}
-.nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
-.nav-links a:hover{color:var(--white)}
+
+.logo{
+    font-size:17px;
+    font-weight:700;
+}
+
+.nav-links{
+    display:flex;
+    gap:24px;
+    color:var(--muted);
+    font-size:13px;
+}
+
+.nav-links a:hover{
+    color:var(--text);
+}
+
 .hero{
-padding:100px 24px 80px;
-border-bottom:1px solid var(--line);
+    padding:120px 24px 110px;
+    border-bottom:1px solid var(--border);
 }
+
 .hero-label{
-font-size:13px;
-color:var(--blue);
-font-weight:600;
-margin-bottom:18px;
+    color:var(--muted);
+    font-size:13px;
+    margin-bottom:18px;
 }
+
 .hero h1{
-font-size:clamp(36px,6vw,58px);
-font-weight:800;
-letter-spacing:-0.02em;
-max-width:720px;
+    font-size:clamp(48px,8vw,82px);
+    line-height:1;
+    letter-spacing:-.055em;
+    max-width:800px;
 }
-.hero h1 .accent{color:var(--red)}
+
+.hero h1 .accent{
+    color:var(--muted);
+}
+
 .hero p{
-max-width:520px;
-margin-top:20px;
-color:var(--muted);
-font-size:16px;
+    max-width:520px;
+    color:var(--muted);
+    font-size:16px;
+    margin-top:26px;
 }
+
 .cta{
-display:inline-block;
-margin-top:32px;
-padding:13px 24px;
-background:var(--red);
-color:#fff;
-font-size:14px;
-font-weight:600;
-border-radius:4px;
+    display:inline-block;
+    margin-top:30px;
+    padding:11px 18px;
+    border:1px solid var(--border);
+    border-radius:5px;
+    font-size:13px;
+    transition:.2s;
 }
-.cta:hover{background:#c81726}
+
+.cta:hover{
+    background:#fff;
+    color:#000;
+}
+
 .section-head{
-padding:64px 24px 24px;
-max-width:1080px;
-margin:0 auto;
-border-bottom:1px solid var(--line);
+    max-width:1050px;
+    margin:auto;
+    padding:70px 24px 25px;
+    border-bottom:1px solid var(--border);
 }
-.section-head span{
-font-size:13px;
-color:var(--blue);
-font-weight:600;
-}
-.section-head h2{
-font-size:28px;
-font-weight:800;
-letter-spacing:-0.01em;
-margin-top:6px;
-}
-.gallery{
-max-width:1080px;
-margin:0 auto;
-padding:32px 24px 70px;
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:14px;
-}
-@media(max-width:720px){
-.gallery{grid-template-columns:repeat(2,1fr)}
-}
-.item{
-background:var(--panel);
-border:1px solid var(--line);
-cursor:pointer;
-overflow:hidden;
-}
-.item-media{
-width:100%;
-aspect-ratio:4/3;
-background:#000;
-overflow:hidden;
-}
-.item-media img,.item-media video{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-}
-.item-caption{
-padding:10px 12px;
-font-size:13px;
-color:var(--muted);
-border-top:1px solid var(--line);
-}
-.featured-grid{
-max-width:1080px;
-margin:0 auto;
-padding:32px 24px 70px;
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
-@media(max-width:720px){
-.featured-grid{grid-template-columns:1fr}
-}
-.featured-item{
-border:1px solid var(--line);
-background:var(--panel);
-}
-.featured-item .item-media{
-aspect-ratio:16/9;
-cursor:pointer;
-}
-.featured-body{padding:16px 18px}
-.featured-body h3{font-size:17px;font-weight:600}
-.featured-body p{
-font-size:14px;
-color:var(--muted);
-margin-top:6px;
-}
-.lightbox{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.92);
-display:none;
-align-items:center;
-justify-content:center;
-z-index:50;
-padding:30px;
-}
-.lightbox.open{display:flex}
-.lightbox-inner{max-width:860px;width:100%}
-.lightbox-inner img,.lightbox-inner video{
-width:100%;
-max-height:78vh;
-object-fit:contain;
-background:#000;
-}
-.lightbox-close{
-position:absolute;
-top:22px;
-right:26px;
-font-size:14px;
-color:var(--muted);
-cursor:pointer;
-}
-.lightbox-close:hover{color:#fff}
-.about{
-padding:64px 24px 80px;
-border-bottom:1px solid var(--line);
-}
-.about-grid{
-max-width:1080px;
-margin:0 auto;
-display:grid;
-grid-template-columns:1fr 1.4fr;
-gap:50px;
-}
-@media(max-width:720px){
-.about-grid{grid-template-columns:1fr}
-}
+
+.section-head span,
 .about span{
-font-size:13px;
-color:var(--blue);
-font-weight:600;
+    color:var(--muted);
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
 }
+
+.section-head h2,
 .about h2{
-font-size:28px;
-font-weight:800;
-margin-top:6px;
+    margin-top:7px;
+    font-size:30px;
+    letter-spacing:-.03em;
 }
+
+.gallery{
+    max-width:1050px;
+    margin:auto;
+    padding:30px 24px 70px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+}
+
+.item{
+    background:var(--card);
+    border:1px solid var(--border);
+    overflow:hidden;
+    cursor:pointer;
+    transition:transform .2s,border-color .2s;
+}
+
+.item:hover{
+    transform:translateY(-3px);
+    border-color:#38383d;
+}
+
+.item-media{
+    width:100%;
+    aspect-ratio:4/3;
+    background:#050505;
+    overflow:hidden;
+}
+
+.item-media img,
+.item-media video{
+    width:100%;
+    height:100%;
+    display:block;
+    object-fit:cover;
+}
+
+.item-caption{
+    padding:12px;
+    color:var(--muted);
+    font-size:12px;
+    border-top:1px solid var(--border);
+}
+
+.featured-grid{
+    max-width:1050px;
+    margin:auto;
+    padding:30px 24px 70px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.featured-item{
+    background:var(--card);
+    border:1px solid var(--border);
+}
+
+.featured-item .item-media{
+    aspect-ratio:16/9;
+    cursor:pointer;
+}
+
+.featured-body{
+    padding:16px;
+}
+
+.featured-body h3{
+    font-size:16px;
+    font-weight:600;
+}
+
+.featured-body p{
+    color:var(--muted);
+    font-size:13px;
+    margin-top:5px;
+}
+
+.about{
+    padding:75px 24px 90px;
+    border-top:1px solid var(--border);
+}
+
+.about-grid{
+    max-width:1050px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1.5fr;
+    gap:70px;
+}
+
 .about p{
-color:var(--muted);
-font-size:15px;
-margin-top:6px;
+    color:var(--muted);
+    font-size:15px;
+    max-width:600px;
 }
+
 .skills{
-display:flex;
-flex-wrap:wrap;
-gap:8px;
-margin-top:20px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+    margin-top:24px;
 }
+
 .skills span{
-font-size:12px;
-color:var(--white);
-border:1px solid var(--line);
-padding:6px 10px;
-border-radius:4px;
+    border:1px solid var(--border);
+    padding:6px 9px;
+    border-radius:4px;
+    color:#bdbdc1;
+    font-size:11px;
 }
-footer{padding:64px 24px 40px}
-.footer-inner{max-width:1080px;margin:0 auto}
-footer h2{
-font-size:clamp(28px,5vw,44px);
-font-weight:800;
-max-width:600px;
+
+.lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.94);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:50;
+    padding:25px;
 }
-footer h2 .accent{color:var(--blue)}
-.footer-links{
-display:flex;
-gap:24px;
-margin-top:24px;
-font-size:14px;
-color:var(--muted);
-flex-wrap:wrap;
+
+.lightbox.open{
+    display:flex;
 }
-.footer-links a:hover{color:var(--red)}
-.footer-bottom{
-max-width:1080px;
-margin:50px auto 0;
-padding-top:20px;
-border-top:1px solid var(--line);
-display:flex;
-justify-content:space-between;
-font-size:12px;
-color:var(--muted);
-flex-wrap:wrap;
-gap:8px;
+
+.lightbox-inner{
+    width:100%;
+    max-width:900px;
+}
+
+.lightbox-inner img,
+.lightbox-inner video{
+    width:100%;
+    max-height:85vh;
+    object-fit:contain;
+    background:#000;
+}
+
+.lightbox-close{
+    position:absolute;
+    top:22px;
+    right:25px;
+    color:var(--muted);
+    font-size:13px;
+    cursor:pointer;
+}
+
+.lightbox-close:hover{
+    color:#fff;
+}
+
+@media(max-width:720px){
+    .nav-links{
+        gap:14px;
+    }
+
+    .hero{
+        padding:90px 24px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .featured-grid{
+        grid-template-columns:1fr;
+    }
+
+    .about-grid{
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+}
+
+@media(max-width:480px){
+    .nav-links a:nth-child(2){
+        display:none;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
@@ -262,160 +330,166 @@ gap:8px;
 
 <header>
 <nav>
-<div class="logo">Yuza<span class="dot">.</span></div>
+<a class="logo" href="#">Yuza</a>
 <div class="nav-links">
 <a href="#work">Work</a>
 <a href="#featured">Featured</a>
 <a href="#about">About</a>
-<a href="#contact">Contact</a>
 </div>
 </nav>
 </header>
 
 <section class="hero">
 <div class="wrap">
-<div class="hero-label">Game Developer / Creative</div>
-<h1>Yuza's <span class="accent">work.</span></h1>
-<p>A collection of games, websites, 3D models, and creative projects made by Yuza.</p>
-<a href="#featured" class="cta">View my work</a>
+<div class="hero-label">Yuza</div>
+<h1>I make <span class="accent">things.</span></h1>
+<p>Games, websites, 3D models, and whatever else I feel like building.</p>
+<a href="#work" class="cta">See what I've made</a>
 </div>
 </section>
 
 <div class="section-head" id="work">
-<span>Work</span>
-<h2>My Work</h2>
+<span>Projects</span>
+<h2>Stuff I've Made</h2>
 </div>
+
 <div class="gallery" id="gallery"></div>
 
 <div class="section-head" id="featured">
 <span>Featured</span>
-<h2>Featured Projects</h2>
+<h2>Projects</h2>
 </div>
+
 <div class="featured-grid" id="featuredGrid"></div>
 
 <section class="about" id="about">
 <div class="about-grid">
 <div>
 <span>About</span>
-<h2>About Yuza</h2>
+<h2>I'm Yuza.</h2>
 </div>
+
 <div>
-<p>I create games, websites, and 3D models, combining technical development with creative design. My work focuses on building unique experiences, polished visuals, and interactive projects. I enjoy working across different areas of development and bringing ideas from concept to finished product.</p>
+<p>I make games, websites, and 3D models. Most of my projects start as random ideas that I end up turning into something real. I like experimenting with different tools and learning new things along the way.</p>
+
 <div class="skills">
 <span>Unity</span>
 <span>C#</span>
 <span>Blender</span>
-<span>Web Development</span>
-<span>3D Modeling</span>
-<span>Game Development</span>
+<span>HTML</span>
+<span>CSS</span>
+<span>JavaScript</span>
 </div>
 </div>
 </div>
 </section>
 
-<footer id="contact">
-<div class="footer-inner">
-<h2>Let's make something <span class="accent">great.</span></h2>
-<div class="footer-links">
-<a href="mailto:you@example.com">you@example.com</a>
-<a href="#">Instagram / X</a>
-<a href="#">YouTube</a>
-</div>
-</div>
-<div class="footer-bottom">
-<span>© <span id="year"></span> Yuza</span>
-<span>Available for freelance work</span>
-</div>
-</footer>
-
 <div class="lightbox" id="lightbox">
-<span class="lightbox-close" id="lightboxClose">Close ✕</span>
+<span class="lightbox-close" id="lightboxClose">Close</span>
 <div class="lightbox-inner" id="lightboxInner"></div>
 </div>
 
 <script>
 const SELECTS = [
-{type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo1.jpg",title:"Game Development"},
-{type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo2.jpg",title:"Website Design"},
-{type:"video",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/clip1.mp4",title:"Game Showcase"},
-{type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo3.jpg",title:"3D Modeling"},
-{type:"video",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/clip2.mp4",title:"Project Showcase"},
-{type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo4.jpg",title:"Creative Work"}
+    {type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo1.jpg",title:"Game"},
+    {type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo2.jpg",title:"Website"},
+    {type:"video",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/clip1.mp4",title:"Game Showcase"},
+    {type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo3.jpg",title:"3D Model"},
+    {type:"video",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/clip2.mp4",title:"Project"},
+    {type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo4.jpg",title:"Other Work"}
 ];
 
 const FEATURED = [
-{
-type:"video",
-src:"https://raw.githubusercontent.com/USERNAME/REPO/main/featured1.mp4",
-title:"Game Project",
-desc:"A featured game project created by Yuza."
-},
-{
-type:"video",
-src:"https://raw.githubusercontent.com/USERNAME/REPO/main/featured2.mp4",
-title:"Creative Project",
-desc:"A featured creative project showcasing Yuza's work."
-}
+    {
+        type:"video",
+        src:"https://raw.githubusercontent.com/USERNAME/REPO/main/featured1.mp4",
+        title:"Game Project",
+        desc:"A game I worked on."
+    },
+    {
+        type:"video",
+        src:"https://raw.githubusercontent.com/USERNAME/REPO/main/featured2.mp4",
+        title:"Another Project",
+        desc:"Something else I've been working on."
+    }
 ];
 
-function mediaTag(item,isLightbox){
-if(item.type==="video"){
-return `<video src="${item.src}" ${isLightbox?"controls autoplay":"muted loop autoplay playsinline"}></video>`;
-}
-return `<img src="${item.src}" alt="${item.title||""}" loading="lazy">`;
+function mediaTag(item,lightbox){
+    if(item.type==="video"){
+        return `<video src="${item.src}" ${lightbox?"controls autoplay":"muted loop autoplay playsinline"}></video>`;
+    }
+
+    return `<img src="${item.src}" alt="${item.title||""}" loading="lazy">`;
 }
 
 const gallery=document.getElementById("gallery");
 
 SELECTS.forEach(item=>{
-const el=document.createElement("div");
-el.className="item";
-el.innerHTML=`
-<div class="item-media">${mediaTag(item,false)}</div>
-<div class="item-caption">${item.title||""}</div>
-`;
-el.addEventListener("click",()=>openLightbox(item));
-gallery.appendChild(el);
+    const element=document.createElement("div");
+
+    element.className="item";
+
+    element.innerHTML=`
+        <div class="item-media">${mediaTag(item,false)}</div>
+        <div class="item-caption">${item.title||""}</div>
+    `;
+
+    element.addEventListener("click",()=>{
+        openLightbox(item);
+    });
+
+    gallery.appendChild(element);
 });
 
 const featuredGrid=document.getElementById("featuredGrid");
 
 FEATURED.forEach(item=>{
-const el=document.createElement("div");
-el.className="featured-item";
-el.innerHTML=`
-<div class="item-media">${mediaTag(item,false)}</div>
-<div class="featured-body">
-<h3>${item.title}</h3>
-<p>${item.desc||""}</p>
-</div>
-`;
-el.querySelector(".item-media").addEventListener("click",()=>openLightbox(item));
-featuredGrid.appendChild(el);
+    const element=document.createElement("div");
+
+    element.className="featured-item";
+
+    element.innerHTML=`
+        <div class="item-media">${mediaTag(item,false)}</div>
+        <div class="featured-body">
+            <h3>${item.title}</h3>
+            <p>${item.desc||""}</p>
+        </div>
+    `;
+
+    element.querySelector(".item-media").addEventListener("click",()=>{
+        openLightbox(item);
+    });
+
+    featuredGrid.appendChild(element);
 });
 
 const lightbox=document.getElementById("lightbox");
 const lightboxInner=document.getElementById("lightboxInner");
 
 function openLightbox(item){
-lightboxInner.innerHTML=mediaTag(item,true);
-lightbox.classList.add("open");
+    lightboxInner.innerHTML=mediaTag(item,true);
+    lightbox.classList.add("open");
+}
+
+function closeLightbox(){
+    lightbox.classList.remove("open");
+    lightboxInner.innerHTML="";
 }
 
 document.getElementById("lightboxClose").addEventListener("click",closeLightbox);
 
-lightbox.addEventListener("click",e=>{
-if(e.target===lightbox)closeLightbox();
+lightbox.addEventListener("click",event=>{
+    if(event.target===lightbox){
+        closeLightbox();
+    }
 });
 
-function closeLightbox(){
-lightbox.classList.remove("open");
-lightboxInner.innerHTML="";
-}
-
-document.getElementById("year").textContent=new Date().getFullYear();
+document.addEventListener("keydown",event=>{
+    if(event.key==="Escape"){
+        closeLightbox();
+    }
+});
 </script>
 
 </body>
 </html>
-```
