@@ -6,6 +6,7 @@
 <title>Yuza</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root{
     --bg:#0b0b0c;
@@ -13,7 +14,7 @@
     --border:#202023;
     --text:#f1f1ef;
     --muted:#85858a;
-    --accent:#ffffff;
+    --hover:#18181b;
 }
 
 *{
@@ -33,6 +34,11 @@ body{
     line-height:1.5;
 }
 
+body::selection{
+    background:#fff;
+    color:#000;
+}
+
 a{
     color:inherit;
     text-decoration:none;
@@ -45,28 +51,38 @@ a{
 }
 
 header{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:rgba(11,11,12,.9);
+    backdrop-filter:blur(14px);
     border-bottom:1px solid var(--border);
 }
 
 nav{
     max-width:1050px;
     margin:auto;
-    padding:22px 24px;
+    padding:20px 24px;
     display:flex;
-    justify-content:space-between;
     align-items:center;
+    justify-content:space-between;
 }
 
 .logo{
     font-size:17px;
     font-weight:700;
+    letter-spacing:-.03em;
 }
 
 .nav-links{
     display:flex;
-    gap:24px;
+    gap:25px;
     color:var(--muted);
     font-size:13px;
+}
+
+.nav-links a{
+    transition:.2s;
 }
 
 .nav-links a:hover{
@@ -74,21 +90,21 @@ nav{
 }
 
 .hero{
-    padding:120px 24px 110px;
+    padding:125px 24px 115px;
     border-bottom:1px solid var(--border);
 }
 
 .hero-label{
     color:var(--muted);
     font-size:13px;
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
 .hero h1{
-    font-size:clamp(48px,8vw,82px);
-    line-height:1;
-    letter-spacing:-.055em;
-    max-width:800px;
+    font-size:clamp(52px,9vw,88px);
+    line-height:.95;
+    letter-spacing:-.065em;
+    font-weight:700;
 }
 
 .hero h1 .accent{
@@ -96,10 +112,10 @@ nav{
 }
 
 .hero p{
-    max-width:520px;
+    max-width:530px;
     color:var(--muted);
     font-size:16px;
-    margin-top:26px;
+    margin-top:27px;
 }
 
 .cta{
@@ -120,29 +136,45 @@ nav{
 .section-head{
     max-width:1050px;
     margin:auto;
-    padding:70px 24px 25px;
+    padding:75px 24px 25px;
     border-bottom:1px solid var(--border);
 }
 
 .section-head span,
+.game-title span,
 .about span{
     color:var(--muted);
-    font-size:12px;
+    font-size:11px;
     text-transform:uppercase;
-    letter-spacing:.08em;
+    letter-spacing:.1em;
 }
 
-.section-head h2,
-.about h2{
+.section-head h2{
     margin-top:7px;
     font-size:30px;
-    letter-spacing:-.03em;
+    letter-spacing:-.04em;
 }
 
-.gallery{
+.game-section{
     max-width:1050px;
     margin:auto;
-    padding:30px 24px 70px;
+    padding:65px 24px 10px;
+}
+
+.game-title{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:22px;
+}
+
+.game-title h2{
+    font-size:26px;
+    font-weight:600;
+    letter-spacing:-.04em;
+}
+
+.game-gallery{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     gap:14px;
@@ -158,7 +190,7 @@ nav{
 
 .item:hover{
     transform:translateY(-3px);
-    border-color:#38383d;
+    border-color:#3a3a3e;
 }
 
 .item-media{
@@ -177,48 +209,15 @@ nav{
 }
 
 .item-caption{
-    padding:12px;
+    padding:11px 12px;
     color:var(--muted);
     font-size:12px;
     border-top:1px solid var(--border);
 }
 
-.featured-grid{
-    max-width:1050px;
-    margin:auto;
-    padding:30px 24px 70px;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:16px;
-}
-
-.featured-item{
-    background:var(--card);
-    border:1px solid var(--border);
-}
-
-.featured-item .item-media{
-    aspect-ratio:16/9;
-    cursor:pointer;
-}
-
-.featured-body{
-    padding:16px;
-}
-
-.featured-body h3{
-    font-size:16px;
-    font-weight:600;
-}
-
-.featured-body p{
-    color:var(--muted);
-    font-size:13px;
-    margin-top:5px;
-}
-
 .about{
-    padding:75px 24px 90px;
+    margin-top:70px;
+    padding:80px 24px 100px;
     border-top:1px solid var(--border);
 }
 
@@ -228,6 +227,12 @@ nav{
     display:grid;
     grid-template-columns:1fr 1.5fr;
     gap:70px;
+}
+
+.about h2{
+    margin-top:7px;
+    font-size:30px;
+    letter-spacing:-.04em;
 }
 
 .about p{
@@ -254,11 +259,11 @@ nav{
 .lightbox{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.94);
+    background:rgba(0,0,0,.95);
     display:none;
     align-items:center;
     justify-content:center;
-    z-index:50;
+    z-index:100;
     padding:25px;
 }
 
@@ -268,15 +273,14 @@ nav{
 
 .lightbox-inner{
     width:100%;
-    max-width:900px;
+    max-width:1000px;
 }
 
-.lightbox-inner img,
-.lightbox-inner video{
+.lightbox-inner img{
     width:100%;
     max-height:85vh;
     object-fit:contain;
-    background:#000;
+    display:block;
 }
 
 .lightbox-close{
@@ -293,25 +297,21 @@ nav{
 }
 
 @media(max-width:720px){
-    .nav-links{
-        gap:14px;
-    }
-
     .hero{
         padding:90px 24px;
     }
 
-    .gallery{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .featured-grid{
-        grid-template-columns:1fr;
+    .game-gallery{
+        grid-template-columns:repeat(2,1fr);
     }
 
     .about-grid{
         grid-template-columns:1fr;
         gap:30px;
+    }
+
+    .nav-links{
+        gap:15px;
     }
 }
 
@@ -320,20 +320,25 @@ nav{
         display:none;
     }
 
-    .gallery{
+    .game-gallery{
         grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:54px;
     }
 }
 </style>
 </head>
+
 <body>
 
 <header>
 <nav>
 <a class="logo" href="#">Yuza</a>
+
 <div class="nav-links">
 <a href="#work">Work</a>
-<a href="#featured">Featured</a>
 <a href="#about">About</a>
 </div>
 </nav>
@@ -341,36 +346,94 @@ nav{
 
 <section class="hero">
 <div class="wrap">
+
 <div class="hero-label">Yuza</div>
+
 <h1>I make <span class="accent">things.</span></h1>
-<p>Games, websites, 3D models, and whatever else I feel like building.</p>
+
+<p>
+Games, websites, 3D models, and whatever else I feel like building.
+</p>
+
 <a href="#work" class="cta">See what I've made</a>
+
 </div>
 </section>
 
 <div class="section-head" id="work">
 <span>Projects</span>
-<h2>Stuff I've Made</h2>
+<h2>My Work</h2>
 </div>
 
-<div class="gallery" id="gallery"></div>
+<section class="game-section">
 
-<div class="section-head" id="featured">
-<span>Featured</span>
-<h2>Projects</h2>
+<div class="game-title">
+<span>01</span>
+<h2>SSGT</h2>
 </div>
 
-<div class="featured-grid" id="featuredGrid"></div>
+<div class="game-gallery" id="ssgt"></div>
+
+</section>
+
+<section class="game-section">
+
+<div class="game-title">
+<span>02</span>
+<h2>Affinity</h2>
+</div>
+
+<div class="game-gallery" id="affinity"></div>
+
+</section>
+
+<section class="game-section">
+
+<div class="game-title">
+<span>03</span>
+<h2>Big Scary Remake</h2>
+</div>
+
+<div class="game-gallery" id="bigscaryremake"></div>
+
+</section>
+
+<section class="game-section">
+
+<div class="game-title">
+<span>04</span>
+<h2>Junkyard Mechs</h2>
+</div>
+
+<div class="game-gallery" id="junkyardmechs"></div>
+
+</section>
+
+<section class="game-section">
+
+<div class="game-title">
+<span>05</span>
+<h2>Lethal Legacy</h2>
+</div>
+
+<div class="game-gallery" id="lethallegacy"></div>
+
+</section>
 
 <section class="about" id="about">
+
 <div class="about-grid">
+
 <div>
 <span>About</span>
 <h2>I'm Yuza.</h2>
 </div>
 
 <div>
-<p>I make games, websites, and 3D models. Most of my projects start as random ideas that I end up turning into something real. I like experimenting with different tools and learning new things along the way.</p>
+
+<p>
+I make games, websites, and 3D models. Most of my projects start as random ideas that I end up turning into something real. I like experimenting with different tools and learning new things along the way.
+</p>
 
 <div class="skills">
 <span>Unity</span>
@@ -380,94 +443,102 @@ nav{
 <span>CSS</span>
 <span>JavaScript</span>
 </div>
+
 </div>
+
 </div>
+
 </section>
 
 <div class="lightbox" id="lightbox">
+
 <span class="lightbox-close" id="lightboxClose">Close</span>
+
 <div class="lightbox-inner" id="lightboxInner"></div>
+
 </div>
 
 <script>
-const SELECTS = [
-    {type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo1.jpg",title:"Game"},
-    {type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo2.jpg",title:"Website"},
-    {type:"video",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/clip1.mp4",title:"Game Showcase"},
-    {type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo3.jpg",title:"3D Model"},
-    {type:"video",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/clip2.mp4",title:"Project"},
-    {type:"image",src:"https://raw.githubusercontent.com/USERNAME/REPO/main/photo4.jpg",title:"Other Work"}
-];
+const GAMES = {
+    ssgt: [
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-07-25%20030702.png","SSGT"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-07-25%20030714.png","SSGT"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-08-14%20143459.png","SSGT"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-08-14%20144228.png","SSGT"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/ssgtgt.png","SSGT"]
+    ],
 
-const FEATURED = [
-    {
-        type:"video",
-        src:"https://raw.githubusercontent.com/USERNAME/REPO/main/featured1.mp4",
-        title:"Game Project",
-        desc:"A game I worked on."
-    },
-    {
-        type:"video",
-        src:"https://raw.githubusercontent.com/USERNAME/REPO/main/featured2.mp4",
-        title:"Another Project",
-        desc:"Something else I've been working on."
-    }
-];
+    affinity: [
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20124612.png","Affinity"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171832.png","Affinity"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171839.png","Affinity"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171853.png","Affinity"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171905.png","Affinity"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171914.png","Affinity"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20210442.png","Affinity"]
+    ],
 
-function mediaTag(item,lightbox){
-    if(item.type==="video"){
-        return `<video src="${item.src}" ${lightbox?"controls autoplay":"muted loop autoplay playsinline"}></video>`;
-    }
+    bigscaryremake: [
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/bigscaryremake/Screenshot%202026-07-25%20025740.png","Big Scary Remake"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/bigscaryremake/Screenshot%202026-07-25%20025751.png","Big Scary Remake"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/bigscaryremake/Screenshot%202026-07-25%20025757.png","Big Scary Remake"]
+    ],
 
-    return `<img src="${item.src}" alt="${item.title||""}" loading="lazy">`;
+    junkyardmechs: [
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-26%20004128.png","Junkyard Mechs"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-26%20004140.png","Junkyard Mechs"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-26%20004149.png","Junkyard Mechs"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-27%20035104.png","Junkyard Mechs"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-27%20035122.png","Junkyard Mechs"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-28%20125313.png","Junkyard Mechs"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-28%20175348.png","Junkyard Mechs"]
+    ],
+
+    lethallegacy: [
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113317.png","Lethal Legacy"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113403.png","Lethal Legacy"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113456.png","Lethal Legacy"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113509.png","Lethal Legacy"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113817.png","Lethal Legacy"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20120234.png","Lethal Legacy"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20120243.png","Lethal Legacy"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20123325.png","Lethal Legacy"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-20%20202914.png","Lethal Legacy"]
+    ]
+};
+
+function createGallery(id,items){
+    const gallery=document.getElementById(id);
+
+    items.forEach(item=>{
+        const element=document.createElement("div");
+
+        element.className="item";
+
+        element.innerHTML=`
+            <div class="item-media">
+                <img src="${item[0]}" alt="${item[1]}" loading="lazy">
+            </div>
+            <div class="item-caption">${item[1]}</div>
+        `;
+
+        element.addEventListener("click",()=>{
+            openLightbox(item[0]);
+        });
+
+        gallery.appendChild(element);
+    });
 }
 
-const gallery=document.getElementById("gallery");
-
-SELECTS.forEach(item=>{
-    const element=document.createElement("div");
-
-    element.className="item";
-
-    element.innerHTML=`
-        <div class="item-media">${mediaTag(item,false)}</div>
-        <div class="item-caption">${item.title||""}</div>
-    `;
-
-    element.addEventListener("click",()=>{
-        openLightbox(item);
-    });
-
-    gallery.appendChild(element);
-});
-
-const featuredGrid=document.getElementById("featuredGrid");
-
-FEATURED.forEach(item=>{
-    const element=document.createElement("div");
-
-    element.className="featured-item";
-
-    element.innerHTML=`
-        <div class="item-media">${mediaTag(item,false)}</div>
-        <div class="featured-body">
-            <h3>${item.title}</h3>
-            <p>${item.desc||""}</p>
-        </div>
-    `;
-
-    element.querySelector(".item-media").addEventListener("click",()=>{
-        openLightbox(item);
-    });
-
-    featuredGrid.appendChild(element);
+Object.entries(GAMES).forEach(([id,items])=>{
+    createGallery(id,items);
 });
 
 const lightbox=document.getElementById("lightbox");
 const lightboxInner=document.getElementById("lightboxInner");
 
-function openLightbox(item){
-    lightboxInner.innerHTML=mediaTag(item,true);
+function openLightbox(src){
+    lightboxInner.innerHTML=`<img src="${src}" alt="">`;
     lightbox.classList.add("open");
 }
 
@@ -489,58 +560,48 @@ document.addEventListener("keydown",event=>{
         closeLightbox();
     }
 });
-</script>
 
-<script>
-document.addEventListener("keydown",event=>{
-    if(event.key==="Escape"){
-        closeLightbox();
-    }
-});
-</script>
-
-<script>
 (function(){
-  document.addEventListener('contextmenu', function(e){
-    e.preventDefault();
-    return false;
-  });
-
-  document.addEventListener('keydown', function(e){
-    var k = e.key || '';
-    var kc = e.keyCode || 0;
-
-    if (k === 'F12' || kc === 123) {
-      e.preventDefault();
-      e.stopPropagation();
-      return false;
-    }
-
-    if (e.ctrlKey || e.metaKey) {
-      if (e.shiftKey && ['i','I','j','J','c','C','k','K','m','M','p','P'].indexOf(k) > -1) {
+    document.addEventListener("contextmenu",function(e){
         e.preventDefault();
-        e.stopPropagation();
         return false;
-      }
+    });
 
-      if (e.altKey && ['i','I','j','J','c','C','u','U'].indexOf(k) > -1) {
+    document.addEventListener("keydown",function(e){
+        var k=e.key||"";
+        var kc=e.keyCode||0;
+
+        if(k==="F12"||kc===123){
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+
+        if(e.ctrlKey||e.metaKey){
+            if(e.shiftKey&&["i","I","j","J","c","C","k","K","m","M","p","P"].indexOf(k)>-1){
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+
+            if(e.altKey&&["i","I","j","J","c","C","u","U"].indexOf(k)>-1){
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+
+            if(!e.shiftKey&&!e.altKey&&["u","U","s","S","p","P","a","A"].indexOf(k)>-1){
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            }
+        }
+    },true);
+
+    document.addEventListener("dragstart",function(e){
         e.preventDefault();
-        e.stopPropagation();
         return false;
-      }
-
-      if (!e.shiftKey && !e.altKey && ['u','U','s','S','p','P','a','A'].indexOf(k) > -1) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }
-    }
-  }, true);
-
-  document.addEventListener('dragstart', function(e){
-    e.preventDefault();
-    return false;
-  });
+    });
 })();
 </script>
 
