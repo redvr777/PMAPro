@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -303,6 +303,56 @@ nav{
     color:#fff;
 }
 
+#youtubeBackground{
+    position:fixed;
+    width:1px;
+    height:1px;
+    left:-100px;
+    top:-100px;
+    opacity:0;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+#youtubePlayer{
+    width:1px;
+    height:1px;
+}
+
+.music-control{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    z-index:50;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:9px 12px;
+    background:rgba(17,17,19,.9);
+    border:1px solid var(--border);
+    border-radius:6px;
+    backdrop-filter:blur(12px);
+}
+
+.music-icon{
+    color:var(--muted);
+    font-size:13px;
+    user-select:none;
+}
+
+.volume-value{
+    color:var(--muted);
+    font-size:10px;
+    min-width:27px;
+    text-align:right;
+}
+
+.music-control input{
+    width:100px;
+    cursor:pointer;
+    accent-color:#fff;
+}
+
 @media(max-width:720px){
     .hero{
         padding:90px 24px;
@@ -334,11 +384,30 @@ nav{
     .hero h1{
         font-size:54px;
     }
+
+    .music-control{
+        right:15px;
+        bottom:15px;
+    }
+
+    .music-control input{
+        width:80px;
+    }
 }
 </style>
 </head>
 
 <body>
+
+<div id="youtubeBackground">
+    <div id="youtubePlayer"></div>
+</div>
+
+<div class="music-control">
+    <span class="music-icon">♫</span>
+    <input type="range" id="volumeSlider" min="0" max="100" value="25">
+    <span class="volume-value" id="volumeValue">25%</span>
+</div>
 
 <header>
 <nav>
@@ -373,67 +442,91 @@ Games, websites, 3D models, and whatever else I feel like building.
 </div>
 
 <section class="game-section">
+
 <div class="game-title">
 <span>01</span>
 <h2>SSGT</h2>
 </div>
+
 <div class="game-gallery" id="ssgt"></div>
+
 </section>
 
 <section class="game-section">
+
 <div class="game-title">
 <span>02</span>
 <h2>Affinity</h2>
 </div>
+
 <div class="game-gallery" id="affinity"></div>
+
 </section>
 
 <section class="game-section">
+
 <div class="game-title">
 <span>03</span>
 <h2>Big Scary Remake</h2>
 </div>
+
 <div class="game-gallery" id="bigscaryremake"></div>
+
 </section>
 
 <section class="game-section">
+
 <div class="game-title">
 <span>04</span>
 <h2>Junkyard Mechs</h2>
 </div>
+
 <div class="game-gallery" id="junkyardmechs"></div>
+
 </section>
 
 <section class="game-section">
+
 <div class="game-title">
 <span>05</span>
 <h2>Lethal Legacy</h2>
 </div>
+
 <div class="game-gallery" id="lethallegacy"></div>
+
 </section>
 
 <section class="game-section">
+
 <div class="game-title">
 <span>06</span>
 <h2>The Mighty Mine</h2>
 </div>
+
 <div class="game-gallery" id="mightymine"></div>
+
 </section>
 
 <section class="game-section">
+
 <div class="game-title">
 <span>07</span>
 <h2>Monkaroon</h2>
 </div>
+
 <div class="game-gallery" id="monkaroon"></div>
+
 </section>
 
 <section class="game-section">
+
 <div class="game-title">
 <span>08</span>
 <h2>Monke Manor</h2>
 </div>
+
 <div class="game-gallery" id="monkemanor"></div>
+
 </section>
 
 <section class="about" id="about">
@@ -474,7 +567,81 @@ I make games, websites, and 3D models. Most of my projects start as random ideas
 
 </div>
 
+<script src="https://www.youtube.com/iframe_api"></script>
+
 <script>
+let youtubePlayer;
+
+function onYouTubeIframeAPIReady(){
+    youtubePlayer=new YT.Player("youtubePlayer",{
+        videoId:"GTx1UYV9Y-o",
+        playerVars:{
+            autoplay:1,
+            controls:0,
+            loop:1,
+            playlist:"GTx1UYV9Y-o",
+            mute:1,
+            playsinline:1,
+            rel:0,
+            modestbranding:1
+        },
+        events:{
+            onReady:function(event){
+                event.target.setVolume(25);
+                event.target.playVideo();
+            },
+            onStateChange:function(event){
+                if(event.data===YT.PlayerState.ENDED){
+                    event.target.playVideo();
+                }
+            }
+        }
+    });
+}
+
+const volumeSlider=document.getElementById("volumeSlider");
+const volumeValue=document.getElementById("volumeValue");
+
+volumeSlider.addEventListener("input",function(){
+    const volume=parseInt(this.value);
+
+    volumeValue.textContent=volume+"%";
+
+    if(!youtubePlayer){
+        return;
+    }
+
+    if(volume===0){
+        youtubePlayer.mute();
+        youtubePlayer.setVolume(0);
+        return;
+    }
+
+    youtubePlayer.unMute();
+    youtubePlayer.setVolume(volume);
+
+    if(youtubePlayer.getPlayerState()!==YT.PlayerState.PLAYING){
+        youtubePlayer.playVideo();
+    }
+});
+
+document.addEventListener("click",function(){
+    if(!youtubePlayer){
+        return;
+    }
+
+    const volume=parseInt(volumeSlider.value);
+
+    if(volume>0){
+        youtubePlayer.unMute();
+        youtubePlayer.setVolume(volume);
+
+        if(youtubePlayer.getPlayerState()!==YT.PlayerState.PLAYING){
+            youtubePlayer.playVideo();
+        }
+    }
+},{once:true});
+
 const GAMES = {
     ssgt: [
         ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/8132E299-EEBF-4A52-867F-D9BB88C9866C%20(1).mov","SSGT Video","video"],
@@ -663,4 +830,4 @@ document.addEventListener("keydown",event=>{
 
 </body>
 </html>
-
+```
