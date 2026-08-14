@@ -14,7 +14,6 @@
     --border:#202023;
     --text:#f1f1ef;
     --muted:#85858a;
-    --hover:#18181b;
 }
 
 *{
@@ -215,6 +214,10 @@ nav{
     border-top:1px solid var(--border);
 }
 
+.video-item .item-media{
+    aspect-ratio:16/9;
+}
+
 .about{
     margin-top:70px;
     padding:80px 24px 100px;
@@ -276,11 +279,13 @@ nav{
     max-width:1000px;
 }
 
-.lightbox-inner img{
+.lightbox-inner img,
+.lightbox-inner video{
     width:100%;
     max-height:85vh;
     object-fit:contain;
     display:block;
+    background:#000;
 }
 
 .lightbox-close{
@@ -290,6 +295,7 @@ nav{
     color:var(--muted);
     font-size:13px;
     cursor:pointer;
+    z-index:101;
 }
 
 .lightbox-close:hover{
@@ -461,49 +467,50 @@ I make games, websites, and 3D models. Most of my projects start as random ideas
 <script>
 const GAMES = {
     ssgt: [
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-07-25%20030702.png","SSGT"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-07-25%20030714.png","SSGT"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-08-14%20143459.png","SSGT"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-08-14%20144228.png","SSGT"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/ssgtgt.png","SSGT"]
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/8132E299-EEBF-4A52-867F-D9BB88C9866C%20(1).mov","SSGT Gameplay","video"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-07-25%20030702.png","SSGT","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-07-25%20030714.png","SSGT","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-08-14%20143459.png","SSGT","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/Screenshot%202026-08-14%20144228.png","SSGT","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/SSGT/ssgtgt.png","SSGT","image"]
     ],
 
     affinity: [
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20124612.png","Affinity"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171832.png","Affinity"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171839.png","Affinity"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171853.png","Affinity"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171905.png","Affinity"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171914.png","Affinity"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20210442.png","Affinity"]
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20124612.png","Affinity","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171832.png","Affinity","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171839.png","Affinity","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171853.png","Affinity","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171905.png","Affinity","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20171914.png","Affinity","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/affinity/Screenshot%202026-06-18%20210442.png","Affinity","image"]
     ],
 
     bigscaryremake: [
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/bigscaryremake/Screenshot%202026-07-25%20025740.png","Big Scary Remake"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/bigscaryremake/Screenshot%202026-07-25%20025751.png","Big Scary Remake"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/bigscaryremake/Screenshot%202026-07-25%20025757.png","Big Scary Remake"]
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/bigscaryremake/Screenshot%202026-07-25%20025740.png","Big Scary Remake","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/bigscaryremake/Screenshot%202026-07-25%20025751.png","Big Scary Remake","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/bigscaryremake/Screenshot%202026-07-25%20025757.png","Big Scary Remake","image"]
     ],
 
     junkyardmechs: [
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-26%20004128.png","Junkyard Mechs"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-26%20004140.png","Junkyard Mechs"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-26%20004149.png","Junkyard Mechs"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-27%20035104.png","Junkyard Mechs"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-27%20035122.png","Junkyard Mechs"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-28%20125313.png","Junkyard Mechs"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-28%20175348.png","Junkyard Mechs"]
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-26%20004128.png","Junkyard Mechs","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-26%20004140.png","Junkyard Mechs","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-26%20004149.png","Junkyard Mechs","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-27%20035104.png","Junkyard Mechs","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-27%20035122.png","Junkyard Mechs","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-28%20125313.png","Junkyard Mechs","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/junkyardmechs/Screenshot%202026-06-28%20175348.png","Junkyard Mechs","image"]
     ],
 
     lethallegacy: [
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113317.png","Lethal Legacy"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113403.png","Lethal Legacy"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113456.png","Lethal Legacy"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113509.png","Lethal Legacy"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113817.png","Lethal Legacy"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20120234.png","Lethal Legacy"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20120243.png","Lethal Legacy"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20123325.png","Lethal Legacy"],
-        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-20%20202914.png","Lethal Legacy"]
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113317.png","Lethal Legacy","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113403.png","Lethal Legacy","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113456.png","Lethal Legacy","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113509.png","Lethal Legacy","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20113817.png","Lethal Legacy","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20120234.png","Lethal Legacy","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20120243.png","Lethal Legacy","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-19%20123325.png","Lethal Legacy","image"],
+        ["https://raw.githubusercontent.com/redvr777/PMAPro/main/lethallegacy/Screenshot%202026-07-20%20202914.png","Lethal Legacy","image"]
     ]
 };
 
@@ -513,17 +520,21 @@ function createGallery(id,items){
     items.forEach(item=>{
         const element=document.createElement("div");
 
-        element.className="item";
+        element.className=item[2]==="video"?"item video-item":"item";
+
+        const media=item[2]==="video"
+            ? `<video src="${item[0]}" muted loop autoplay playsinline preload="metadata"></video>`
+            : `<img src="${item[0]}" alt="${item[1]}" loading="lazy">`;
 
         element.innerHTML=`
             <div class="item-media">
-                <img src="${item[0]}" alt="${item[1]}" loading="lazy">
+                ${media}
             </div>
             <div class="item-caption">${item[1]}</div>
         `;
 
         element.addEventListener("click",()=>{
-            openLightbox(item[0]);
+            openLightbox(item[0],item[2]);
         });
 
         gallery.appendChild(element);
@@ -537,8 +548,17 @@ Object.entries(GAMES).forEach(([id,items])=>{
 const lightbox=document.getElementById("lightbox");
 const lightboxInner=document.getElementById("lightboxInner");
 
-function openLightbox(src){
-    lightboxInner.innerHTML=`<img src="${src}" alt="">`;
+function openLightbox(src,type){
+    if(type==="video"){
+        lightboxInner.innerHTML=`
+            <video src="${src}" controls autoplay playsinline></video>
+        `;
+    }else{
+        lightboxInner.innerHTML=`
+            <img src="${src}" alt="">
+        `;
+    }
+
     lightbox.classList.add("open");
 }
 
